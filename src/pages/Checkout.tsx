@@ -4,7 +4,7 @@ import { useOrders } from "@/context/OrderContext";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { CheckCircle, Truck } from "lucide-react";
+import { CheckCircle, Truck, ShoppingBag, ArrowRight } from "lucide-react";
 
 const Checkout = () => {
   const { items, totalPrice, clearCart } = useCart();
@@ -17,6 +17,19 @@ const Checkout = () => {
   const [address, setAddress] = useState(user?.address || "");
   const [placed, setPlaced] = useState(false);
   const [orderId, setOrderId] = useState("");
+
+  if (!user) {
+    return (
+      <div className="min-h-screen pt-24 flex flex-col items-center justify-center gap-6">
+        <ShoppingBag className="h-16 w-16 text-muted-foreground" />
+        <h2 className="font-display text-2xl font-bold text-foreground">Please login to place an order</h2>
+        <p className="text-muted-foreground">You need to be logged in to proceed with checkout.</p>
+        <button onClick={() => navigate("/login")} className="btn-neon flex items-center gap-2">
+          Login Now <ArrowRight className="h-5 w-5" />
+        </button>
+      </div>
+    );
+  }
 
   if (items.length === 0 && !placed) {
     navigate("/cart");
