@@ -5,7 +5,7 @@ import { categoryLabels, type ProductCategory } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { Search } from "lucide-react";
 
-const allCategories: ProductCategory[] = ["beginner", "exotic", "pairs", "aquariums", "accessories"];
+const allCategories: ProductCategory[] = ["fishes", "aquariums-accessories"];
 
 const Shop = () => {
   const [searchParams] = useSearchParams();
