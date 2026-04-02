@@ -10,7 +10,7 @@ import aquariumTankImg from "@/assets/aquarium-tank.jpg";
 import filterImg from "@/assets/accessory-filter.jpg";
 import lightImg from "@/assets/accessory-light.jpg";
 
-export type ProductCategory = "beginner" | "exotic" | "pairs" | "aquariums" | "accessories";
+export type ProductCategory = "fishes" | "aquariums-accessories";
 
 export interface Product {
   id: string;
