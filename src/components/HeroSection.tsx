@@ -3,18 +3,22 @@ import heroBg from "@/assets/hero-bg.jpg";
 import { ArrowRight, Waves } from "lucide-react";
 
 const HeroSection = () => (
-  <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-    <img
-      src={heroBg}
-      alt="Underwater aquarium"
-      width={1920}
-      height={1080}
-      className="absolute inset-0 w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
-    <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+  <section className="relative min-h-[90vh] flex flex-col overflow-hidden">
+    {/* Image area - takes top portion */}
+    <div className="relative w-full h-[55vh] flex-shrink-0">
+      <img
+        src={heroBg}
+        alt="Underwater aquarium"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-background/30" />
+    </div>
 
-    <div className="relative z-10 text-center px-4 animate-slide-up max-w-3xl mx-auto">
+    {/* Text below the image */}
+    <div className="relative z-10 text-center px-4 animate-slide-up max-w-3xl mx-auto flex-1 flex flex-col justify-center">
       <div className="flex items-center justify-center gap-2 mb-6">
         <Waves className="h-6 w-6 text-primary animate-float" />
         <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Premium Aquarium Store</span>
