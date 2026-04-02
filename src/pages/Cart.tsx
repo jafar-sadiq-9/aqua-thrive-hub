@@ -76,9 +76,15 @@ const Cart = () => {
             <span className="text-lg font-semibold text-foreground">Total</span>
             <span className="font-display text-2xl font-bold neon-text">${totalPrice.toFixed(2)}</span>
           </div>
-          <Link to="/checkout" className="btn-neon w-full flex items-center justify-center gap-2 text-base">
-            Proceed to Checkout <ArrowRight className="h-5 w-5" />
-          </Link>
+          {user ? (
+            <Link to="/checkout" className="btn-neon w-full flex items-center justify-center gap-2 text-base">
+              Proceed to Checkout <ArrowRight className="h-5 w-5" />
+            </Link>
+          ) : (
+            <button onClick={() => navigate("/login")} className="btn-neon w-full flex items-center justify-center gap-2 text-base">
+              Login to Checkout <LogIn className="h-5 w-5" />
+            </button>
+          )}
         </div>
       </div>
     </div>
