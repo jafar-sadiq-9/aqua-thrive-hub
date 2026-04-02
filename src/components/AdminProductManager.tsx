@@ -24,7 +24,7 @@ const emptyForm: ProductFormData = {
   pairPrice: "",
   image: "",
   description: "",
-  category: "beginner",
+  category: "fishes",
   stock: "",
   isPair: false,
   featured: false,
