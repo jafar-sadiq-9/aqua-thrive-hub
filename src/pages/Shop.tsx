@@ -1,14 +1,16 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { products, categoryLabels, type ProductCategory } from "@/lib/products";
+import { useProducts } from "@/context/ProductContext";
+import { categoryLabels, type ProductCategory } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
-import { Search, Filter } from "lucide-react";
+import { Search } from "lucide-react";
 
 const allCategories: ProductCategory[] = ["beginner", "exotic", "pairs", "aquariums", "accessories"];
 
 const Shop = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const initialCat = searchParams.get("category") as ProductCategory | null;
+  const { products } = useProducts();
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<ProductCategory | "all">(initialCat || "all");
@@ -22,7 +24,7 @@ const Shop = () => {
         p.description.toLowerCase().includes(search.toLowerCase());
       return matchCat && matchSearch;
     });
-  }, [search, category]);
+  }, [search, category, products]);
 
   return (
     <div className="min-h-screen pt-24 pb-12">
@@ -67,7 +69,6 @@ const Shop = () => {
           </div>
         </div>
 
-        {/* Results */}
         {filtered.length === 0 ? (
           <div className="text-center py-20 text-muted-foreground">
             <p className="text-lg">No products found.</p>
