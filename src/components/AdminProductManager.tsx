@@ -4,7 +4,7 @@ import { type Product, type ProductCategory, categoryLabels } from "@/lib/produc
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, X, ImagePlus, Save } from "lucide-react";
 
-const allCategories: ProductCategory[] = ["beginner", "exotic", "pairs", "aquariums", "accessories"];
+const allCategories: ProductCategory[] = ["fishes", "aquariums-accessories"];
 
 interface ProductFormData {
   name: string;
