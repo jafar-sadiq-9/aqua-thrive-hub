@@ -1,9 +1,12 @@
 import { useCart } from "@/context/CartContext";
-import { Link } from "react-router-dom";
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, LogIn } from "lucide-react";
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, totalPrice } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
