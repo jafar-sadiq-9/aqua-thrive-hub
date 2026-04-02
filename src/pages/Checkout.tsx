@@ -4,7 +4,7 @@ import { useOrders } from "@/context/OrderContext";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { CheckCircle, Truck, ShoppingBag, ArrowRight, Plus, Minus, Fish } from "lucide-react";
+import { CheckCircle, Truck, ShoppingBag, ArrowRight, Plus, Minus, Fish, Trash2 } from "lucide-react";
 
 const Checkout = () => {
   const { items, totalPrice, clearCart, updateQuantity } = useCart();
