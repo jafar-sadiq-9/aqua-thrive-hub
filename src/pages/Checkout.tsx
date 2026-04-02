@@ -4,10 +4,10 @@ import { useOrders } from "@/context/OrderContext";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { CheckCircle, Truck, ShoppingBag, ArrowRight } from "lucide-react";
+import { CheckCircle, Truck, ShoppingBag, ArrowRight, Plus, Minus, Fish } from "lucide-react";
 
 const Checkout = () => {
-  const { items, totalPrice, clearCart } = useCart();
+  const { items, totalPrice, clearCart, updateQuantity } = useCart();
   const { placeOrder } = useOrders();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -76,15 +76,50 @@ const Checkout = () => {
           {/* Order summary */}
           <div className="glass-card p-6">
             <h3 className="font-display text-sm font-semibold mb-4 text-foreground">Order Summary</h3>
-            {items.map((item) => (
-              <div key={item.product.id} className="flex justify-between text-sm mb-2">
-                <span className="text-muted-foreground">
-                  {item.product.name} × {item.quantity}
-                </span>
-                <span className="text-foreground">${(item.product.price * item.quantity).toFixed(2)}</span>
-              </div>
-            ))}
-            <div className="border-t border-border mt-3 pt-3 flex justify-between font-semibold">
+            <div className="flex flex-col gap-4">
+              {items.map((item) => {
+                const isFish = item.product.category === "fishes";
+                const unitLabel = isFish ? (item.product.isPair ? "pair" : "fish") : "item";
+                const pluralLabel = isFish ? (item.product.isPair ? "pairs" : "fishes") : "items";
+                return (
+                  <div key={item.product.id} className="flex items-center gap-3">
+                    <img src={item.product.image} alt={item.product.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-foreground truncate">{item.product.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        ${item.product.price.toFixed(2)} / {unitLabel}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => updateQuantity(item.product.id, Math.max(1, item.quantity - (isFish && item.product.isPair ? 1 : 1)))}
+                        className="w-7 h-7 rounded-md bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+                      >
+                        <Minus className="h-3 w-3" />
+                      </button>
+                      <div className="flex flex-col items-center min-w-[48px]">
+                        <span className="text-sm font-bold text-foreground">{item.quantity}</span>
+                        <span className="text-[10px] text-primary leading-none">
+                          {isFish ? (item.product.isPair ? "pairs" : "fishes") : "items"}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                        className="w-7 h-7 rounded-md bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+                      >
+                        <Plus className="h-3 w-3" />
+                      </button>
+                    </div>
+                    <span className="text-sm font-semibold text-foreground min-w-[60px] text-right">
+                      ${(item.product.price * item.quantity).toFixed(2)}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="border-t border-border mt-4 pt-4 flex justify-between font-semibold">
               <span className="text-foreground">Total</span>
               <span className="neon-text font-display">${totalPrice.toFixed(2)}</span>
             </div>
