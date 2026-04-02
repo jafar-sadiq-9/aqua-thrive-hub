@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import type { CartItem } from "./CartContext";
 import { toast } from "sonner";
 
+export type OrderStatus = "pending" | "confirmed" | "delivered" | "cancelled";
+
 export interface Order {
   id: string;
   customerName: string;
@@ -9,14 +11,16 @@ export interface Order {
   address: string;
   items: CartItem[];
   total: number;
-  status: "pending" | "confirmed" | "delivered";
+  status: OrderStatus;
   date: string;
 }
 
 interface OrderContextType {
   orders: Order[];
   placeOrder: (order: Omit<Order, "id" | "status" | "date">) => Order;
-  updateOrderStatus: (id: string, status: Order["status"]) => void;
+  updateOrderStatus: (id: string, status: OrderStatus) => void;
+  cancelOrder: (id: string) => void;
+  removeItemFromOrder: (orderId: string, productId: string) => void;
   newOrderCount: number;
   clearNewOrderCount: () => void;
 }
