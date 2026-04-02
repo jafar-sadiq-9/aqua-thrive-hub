@@ -58,6 +58,9 @@ const Navbar = () => {
                   Admin
                 </Link>
               )}
+              <Link to="/my-orders" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Package className="h-4 w-4" /> Orders
+              </Link>
               <span className="text-sm text-muted-foreground">{user.name}</span>
               <button onClick={logout} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Logout
