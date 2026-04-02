@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { CheckCircle, Truck, ShoppingBag, ArrowRight, Plus, Minus, Fish } from "lucide-react";
 
 const Checkout = () => {
-  const { items, totalPrice, clearCart } = useCart();
+  const { items, totalPrice, clearCart, updateQuantity } = useCart();
   const { placeOrder } = useOrders();
   const { user } = useAuth();
   const navigate = useNavigate();
