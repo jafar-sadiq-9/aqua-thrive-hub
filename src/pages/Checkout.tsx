@@ -93,7 +93,7 @@ const Checkout = () => {
                     <div className="flex items-center gap-1.5">
                       <button
                         type="button"
-                        onClick={() => updateQuantity(item.product.id, Math.max(1, item.quantity - (isFish && item.product.isPair ? 1 : 1)))}
+                        onClick={() => updateQuantity(item.product.id, Math.max(1, item.quantity - 1))}
                         className="w-7 h-7 rounded-md bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
                       >
                         <Minus className="h-3 w-3" />
@@ -115,6 +115,14 @@ const Checkout = () => {
                     <span className="text-sm font-semibold text-foreground min-w-[60px] text-right">
                       ${(item.product.price * item.quantity).toFixed(2)}
                     </span>
+                    <button
+                      type="button"
+                      onClick={() => removeFromCart(item.product.id)}
+                      className="p-1.5 rounded-md text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                      title="Remove item"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
                   </div>
                 );
               })}
